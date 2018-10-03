@@ -21,13 +21,30 @@ class card
     //value and suit.
     // c = club d = diamond h = heart s = spade.
     public:
-      card(); //constructor
-      card(int v, string s); //stores card value and suit
-      void setValue(int v);
-      void setSuit(string s);
-      int getValue(card &c);
-      string getSuit(card &c);
+      //constructor
+      card();
+
+      //stores card value and suit
+      card(const card &obj);
+
+      //sets the value
+      void setValue(int value);
+
+      //sets the suit
+      void setSuit(string suit);
+
+      //returns value of card
+      int getValue();
+
+      //return suit of the card
+      string getSuit();
+
+      //prints value and suit
+      void printCard();
       //overload operator to print a cards value and suit
+
+      ~card();
+
       friend ostream& operator<< (ostream &ostr, const card &c);
 
     private:
@@ -41,32 +58,44 @@ class card
 
 card::card()
 { //initialize the single card which can have a value and suit
-  value = 0;
-  suit = "";
+  //value;
+  //suit;
 }
 
-card::card(int v, string s)
+card::card(const card &obj)
 {
-  value = v;
-  suit = s;
+  //value;
+  //suit;
 }
 
-void card::setValue(int v)
+void card::setValue(int value)
 {
-  value = v;
+  this->value = value;
 }
 
-void card::setSuit(string s)
+void card::setSuit(string suit)
 {
-  suit = s;
+  this->suit = suit;
 }
 
-int card::getValue(card &c)
+int card::getValue()
 {
   return value;
 }
 
-string card::getSuit(card &c)
+string card::getSuit()
 {
   return suit;
+}
+
+void card::printCard()
+{
+  if (this->value != 1)
+    cout << "This card is the " << value << " of " << suit << ".\n";
+  else
+    cout << "This card is the ace of " << suit << ".\n";
+}
+
+card::~card()
+{
 }

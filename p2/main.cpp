@@ -12,15 +12,8 @@ using namespace std;
 
 int main()
 {
-  deck mainDeck();  //create object which makes empty deck of size 52
-  mainDeck.fillDeck();  //fill the deck with all the 52 cards in order
-  mainDeck.printDeck();  //print deck to screen (ordered)
-
-  for (int j = 0; j < 3; j++)
-  {
-    mainDeck.shuffle();  //shuffle the deck
-    mainDeck.printDeck();  //print deck to screen
-  }
+  deck mainDeck;  //create object which makes empty deck of size 52
+  mainDeck.playFlip();
 
   return  0;
 }
