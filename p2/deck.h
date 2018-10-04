@@ -51,6 +51,8 @@ class deck
       node<card> *current;
       node<card> *next;
       card *first_card;
+      node<card> *front;
+      node<card> *new_node;
 
       //length of the deck and suit cards
       int length;
@@ -83,7 +85,7 @@ deck::deck()
       card card;
       card.setSuit(clubs);  //set the suit
       card.setValue(i);     //set the value
-      game_deck->push_back(card);
+      game_deck->nodeValue = card;
 
       //set first card
       if (i == 1)
@@ -105,7 +107,7 @@ deck::deck()
       card card;
       card.setSuit(spades);
       card.setValue(i);
-      game_deck->push_back(card);
+      game_deck->nodeValue = card;
   }
 
   //hearts suit
@@ -114,7 +116,7 @@ deck::deck()
       card card;
       card.setSuit(hearts);
       card.setValue(i);
-      game_deck->push_back(card);
+      game_deck->nodeValue = card;
   }
 
   //diamonds suit
@@ -123,11 +125,11 @@ deck::deck()
       card card;
       card.setSuit(diamonds);
       card.setValue(i);
-      game_deck->push_back(card);
+      game_deck->nodeValue = card;
 
       try
       {
-          game_deck->push_back(card);
+          game_deck->nodeValue = card;
       }
       catch (rangeError &ex)
       {
@@ -153,7 +155,7 @@ deck::deck(deck &obj)
         card card;
         card.setSuit(clubs);
         card.setValue(i);
-        game_deck->push_back(card);
+        game_deck->nodeValue = card;
 
         //set first card
         if (i == 1)
@@ -175,7 +177,7 @@ deck::deck(deck &obj)
         card card;
         card.setSuit(spades);
         card.setValue(i);
-        game_deck->push_back(card);
+        game_deck->nodeValue = card;
     }
 
     //hearts suit
@@ -184,7 +186,7 @@ deck::deck(deck &obj)
         card card;
         card.setSuit(hearts);
         card.setValue(i);
-        game_deck->push_back(card);
+        game_deck->nodeValue = card;
     }
 
     //diamonds suit
@@ -193,7 +195,7 @@ deck::deck(deck &obj)
         card card;
         card.setSuit(diamonds);
         card.setValue(i);
-        game_deck->push_back(card);
+        game_deck->nodeValue = card;
     }
 }//END
 
@@ -201,7 +203,8 @@ void deck::shuffle()
 {
   //int i, j;
   //srand(time(0));
-  swap(game_deck.front(), game_deck.back());
+  new_node = front;
+  //swap(game_deck->nodeValue, game_deck->next);
 }
 
 void deck::playFlip()
@@ -230,7 +233,7 @@ void deck::printDeck()
 {
   //display deck to the screen
   // i don't know if this is correct
-  for (list<card>::iterator it = game_deck.begin(); it != game_deck->end(); ++it)
+  for (int i = 0; i < 52; i++)
       card_deck->nodeValue.printCard();
 }
 
