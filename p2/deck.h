@@ -53,6 +53,7 @@ class deck
       card *first_card;
       node<card> *front;
       node<card> *new_node;
+      card c(int value, string suit);
 
       //length of the deck and suit cards
       int length;
@@ -203,7 +204,8 @@ void deck::shuffle()
 {
   //int i, j;
   //srand(time(0));
-  new_node = front;
+  new_node = new node<card> (c, front);
+  front = new_node;
   //swap(game_deck->nodeValue, game_deck->next);
 }
 
