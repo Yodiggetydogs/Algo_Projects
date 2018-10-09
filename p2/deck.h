@@ -11,6 +11,7 @@ Group ID: DAVMAT
 #include "d_except.h"
 
 #include <cstdlib>
+#include <stdlib.h>
 #include <random>
 #include <algorithm>
 #include <utility>
@@ -33,13 +34,13 @@ class deck
       void shuffle();
 
       //starts the game
-      void playFlip();
+      void playFlip(const deck& d);
 
       //overloaded operator that prints the cards in the deck
       friend ostream& operator<< (ostream &ostr, const deck& d);
 
       //prints the entire deck
-      void printDeck();
+      void printDeck(const deck& d);
 
       ~deck();
 
@@ -67,6 +68,16 @@ class deck
 // ***********************************************************
 //      deck class implementation
 // ***********************************************************
+
+/*
+friend ostream& operator<<(ostream& os, const Date& dt)
+{
+    os << dt.mo << '/' << dt.da << '/' << dt.yr;
+    return os;
+}
+*/
+
+
 
 deck::deck()
 {
@@ -138,7 +149,6 @@ deck::deck()
           cerr << ex.what() << endl;
       }
   }
-
 }//END
 
 deck::deck(deck &obj)
@@ -202,41 +212,64 @@ deck::deck(deck &obj)
 
 void deck::shuffle()
 {
-  //int i, j;
-  //srand(time(0));
-  new_node = new node<card> (c, front);
-  front = new_node;
-  //swap(game_deck->nodeValue, game_deck->next);
+  int index;
+  for(int i = 0; i < 52; i++)
+  {
+    index = rand() % 52;
+    for (int i = 0; i < index-1; i++)
+    {
+      current = front->next;
+    }
+    front = current -> next;
+  }
 }
 
-void deck::playFlip()
+void deck::playFlip(const deck& d)
 {
-    cout << "Cards to be shuffled.\n";
-    printDeck();
-    cout << "Shuffling first time.\n";
+    std::cout << "Cards to be shuffled.\n";
+    printDeck(d);
+    std::cout << "Shuffling first time.\n";
 
     shuffle();
-    cout << "cards after first shuffle.\n";
-    printDeck();
-    cout << "Shuffing second time.\n";
+    std::cout << "cards after first shuffle.\n";
+    printDeck(d);
+    std::cout << "Shuffing second time.\n";
 
     shuffle();
-    cout << "Cards after second shuffle.\n";
-    printDeck();
-    cout << "Shuffling third time.\n";
+    std::cout << "Cards after second shuffle.\n";
+    printDeck(d);
+    std::cout << "Shuffling third time.\n";
 
     shuffle();
-    cout << "Cards after third shuffle.\n";
-    printDeck();
-    cout << "Done shuffling.\n\n";
+    std::cout << "Cards after third shuffle.\n";
+    printDeck(d);
+    std::cout << "Done shuffling.\n\n";
 }
 
-void deck::printDeck()
+ostream& operator<< (ostream &ostr, const deck& d)
+{
+  int i = 0;
+
+  current = front;
+  //string temp;
+  while(current != NULL)
+  {
+
+    //card &c = d.front;
+    //string temp = c.printCard();
+    std::cout << "[" << i << "]: ";
+    ostr <<current.printCard();
+    current = current->next;
+    return ostr;
+    i++;
+  }
+}
+
+void deck::printDeck(const deck& d)
 {
   //display deck to the screen
   // i don't know if this is correct
-  for (int i = 0; i < 52; i++)
-      card_deck->nodeValue.printCard();
+  cout<< d;
 }
 
 deck::~deck()

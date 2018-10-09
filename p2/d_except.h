@@ -10,7 +10,7 @@ class baseException
 {
 	public:
 		baseException(const string& str = ""):
-			msgString(str)
+		msgString(str)
 		{
 			if (msgString == "")
 				msgString = "Unspecified exception";

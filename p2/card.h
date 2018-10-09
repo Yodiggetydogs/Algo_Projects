@@ -58,15 +58,17 @@ class card
 
 card::card()
 { //initialize the single card which can have a value and suit
-  //value;
-  //suit;
+  setValue(value);
+  setSuit(suit);
 }
 
+/*
 card::card(const card &obj)
 {
-  //value;
-  //suit;
+  value;
+  suit;
 }
+*/
 
 void card::setValue(int value)
 {
